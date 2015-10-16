@@ -102,6 +102,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\kml\facilities\GroundStation.png" />
+    <Content Include="App_Data\kml\facilities\LaserStation.png" />
+    <Content Include="App_Data\kml\facilities\LaunchPad.png" />
+    <Content Include="App_Data\kml\facilities\LaunchSite.png" />
+    <Content Include="App_Data\kml\facilities\OpticalTrackingStation.png" />
+    <Content Include="App_Data\kml\facilities\RadarStation.png" />
+    <Content Include="App_Data\models\CesiumAir\0_Cesium_Air.png" />
+    <Content Include="App_Data\models\CesiumAir\1_Cesium_Air_Prop.png" />
+    <Content Include="App_Data\models\CesiumGround\images\0_Cesium_Ground-wheel.jpg" />
+    <Content Include="App_Data\models\CesiumGround\images\1_Cesium_Ground-body.jpg" />
+    <Content Include="App_Data\models\CesiumMan\Cesium_Man.jpg" />
+    <Content Include="App_Data\models\CesiumMilkTruck\CesiumMilkTruck.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -375,6 +387,26 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="App_Data\kml\bikeRide.kml" />
+    <Content Include="App_Data\kml\facilities\facilities.kml" />
+    <Content Include="App_Data\kml\gdpPerCapita2008.kmz" />
+    <Content Include="App_Data\models\CesiumAir\Cesium_Air.bgltf" />
+    <Content Include="App_Data\models\CesiumAir\Cesium_Air.dae" />
+    <Content Include="App_Data\models\CesiumAir\Cesium_Air.gltf" />
+    <Content Include="App_Data\models\CesiumGround\Cesium_Ground.bgltf" />
+    <Content Include="App_Data\models\CesiumGround\Cesium_Ground.dae" />
+    <Content Include="App_Data\models\CesiumGround\Cesium_Ground.gltf" />
+    <Content Include="App_Data\models\CesiumMan\Cesium_Man.bgltf" />
+    <Content Include="App_Data\models\CesiumMan\Cesium_Man.dae" />
+    <Content Include="App_Data\models\CesiumMan\Cesium_Man.gltf" />
+    <Content Include="App_Data\models\CesiumMilkTruck\CesiumMilkTruck.bgltf" />
+    <Content Include="App_Data\models\CesiumMilkTruck\CesiumMilkTruck.dae" />
+    <Content Include="App_Data\models\CesiumMilkTruck\CesiumMilkTruck.gltf" />
+    <Content Include="App_Data\ne_10m_us_states.topojson" />
+    <Content Include="App_Data\population909500.json" />
+    <Content Include="App_Data\simple.czml" />
+    <Content Include="App_Data\simplestyles.geojson" />
+    <Content Include="App_Data\Vehicle.czml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -433,9 +465,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
