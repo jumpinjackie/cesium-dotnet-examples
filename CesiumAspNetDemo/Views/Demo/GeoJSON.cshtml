@@ -43,15 +43,15 @@
 
             this.loadLayers = function () {
                 var data_playgrounds = null;
-                var p_playgrounds = Cesium.GeoJsonDataSource.load("@Url.Action("Data_Playgrounds", "Demo")");
+                var p_playgrounds = Cesium.GeoJsonDataSource.load("@Url.Content("~/Content/RECREATION_Playgrounds.geojson")");
             
                 var data_rail = null;
-                var p_rail = Cesium.GeoJsonDataSource.load("@Url.Action("Data_Rail", "Demo")", {
+                var p_rail = Cesium.GeoJsonDataSource.load("@Url.Content("~/Content/TRANS_Rail.geojson")", {
                     stroke: Cesium.Color.RED,
                     strokeWidth: 3
                 });
                 var data_zoning = null;
-                var p_zoning = Cesium.GeoJsonDataSource.load("@Url.Action("Data_Zoning", "Demo")", {
+                var p_zoning = Cesium.GeoJsonDataSource.load("@Url.Content("~/Content/CDD_ZoningDistricts.geojson")", {
                     fill: Cesium.Color.ORANGE.withAlpha(0.3),
                     stroke: Cesium.Color.DARKORANGE
                 });

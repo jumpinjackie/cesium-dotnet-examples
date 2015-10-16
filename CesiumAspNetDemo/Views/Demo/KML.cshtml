@@ -1,0 +1,100 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>KML</title>
+    <link rel="stylesheet" href="~/Scripts/Cesium/Widgets/widgets.css" />
+    <style type="text/css">
+        #layers {
+            padding: 8px;
+            background-color: #313098;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 50;
+            color: white;
+        }
+
+        #viewer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
+    <script type="text/javascript" src="~/Scripts/Cesium/Cesium.js"></script>
+    <script type="text/javascript">
+
+        var ko = Cesium.knockout;
+
+        function LayersViewModel(viewer) {
+            var _this = this;
+
+            // ----------- Obserable properties ------------- //
+            this.facilitiesVisible = ko.observable(false);
+            this.gdpVisible = ko.observable(false);
+            // ---------------------------------------------- //
+
+            var _viewer = viewer;
+
+            this.loadLayers = function () {
+                var data_facilities = null;
+                var p_facilities = Cesium.KmlDataSource.load("@Url.Content("~/Content/kml/facilities/facilities.kml")", {
+                    sourceUri: "@Url.Content("~/Content/kml/facilities/")"
+                });
+
+                var data_gdp = null;
+                var p_gdp = Cesium.KmlDataSource.load("@Url.Content("~/Content/kml/gdpPerCapita2008.kmz")");
+
+                return Promise.all([p_facilities, p_gdp]).then(function (dataSources) {
+                    data_facilities = dataSources[0];
+                    data_gdp = dataSources[1];
+
+                    _this.facilitiesVisible.subscribe(function (newVal) {
+                        _this.toggleDataSource(data_facilities);
+                    });
+                    _this.gdpVisible.subscribe(function (newVal) {
+                        _this.toggleDataSource(data_gdp);
+                    });
+                });
+            };
+
+            // ---------- public ---------- //
+            this.toggleDataSource = function (dataSource) {
+                if (_viewer.dataSources.contains(dataSource)) {
+                    _viewer.dataSources.remove(dataSource);
+                } else {
+                    _viewer.dataSources.add(dataSource);
+                }
+            };
+            // ---------------------------- //
+        }
+
+        window.onload = function () {
+            var viewer = new Cesium.Viewer("viewer");
+            var viewModel = new LayersViewModel(viewer);
+            viewModel.loadLayers().then(function () {
+                ko.applyBindings(viewModel, document.getElementById("layers"));
+            });
+        };
+
+    </script>
+</head>
+<body>
+    <div id="viewer">
+        <div id="layers">
+            <div>
+                <input type="checkbox" data-bind="checked: facilitiesVisible" /> Facilities
+            </div>
+            <div>
+                <input type="checkbox" data-bind="checked: gdpVisible" /> Country GDP
+            </div>
+            <a href="@Url.Action("Index", "Demo")">Return to Demos</a>
+        </div>
+    </div>
+</body>
+</html>

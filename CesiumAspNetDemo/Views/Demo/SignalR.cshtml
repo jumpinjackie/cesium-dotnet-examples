@@ -1,0 +1,154 @@
+﻿@{
+    Layout = null;
+    var groupName = "SignalRDemo";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SignalR</title>
+    <style type="text/css">
+        #viewer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        #controls {
+            padding: 8px;
+            background-color: #313098;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 50;
+            color: white;
+        }
+    </style>
+    <link rel="stylesheet" href="~/Scripts/Cesium/Widgets/widgets.css" />
+    <script type="text/javascript" src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script type="text/javascript" src="~/signalr/hubs"></script>
+    <script type="text/javascript" src="~/Scripts/Cesium/Cesium.js"></script>
+    <script type="text/javascript">
+
+        var czmlDS = null;
+        var ko = Cesium.knockout;
+        var conn = $.connection.DemoHub;
+        
+        function FormatDescription(data) {
+            var html = "";
+            html += "<p>Browser: " + data.Browser + " v" + data.BrowserVersion + "</p>";
+            html += "<p>OS: " + data.OS + " v" + data.OSVersion + "</p>";
+            html += "<p>Device: " + data.Device + "</p>";
+            return html;
+        }
+
+        function DataToCzmlPacket(data) {
+            return [{
+                id: data.ClientID,
+                description: FormatDescription(data),
+                point: {
+                    color: {
+                        rgba: [255, 0, 0, 255]
+                    },
+                    pixelSize: {
+                        number: 8
+                    }
+                },
+                position: {
+                    cartographicDegrees: [
+                        data.Longitude,
+                        data.Latitude,
+                        0
+                    ]
+                }
+            }];
+        }
+
+        conn.client.NewLocation = function (ua) {
+            console.log("Received data");
+            var packet = DataToCzmlPacket(ua);
+            czmlDS.process(packet).then(function () {
+                console.log("Map updated");
+            });
+        };
+
+        function Send(lon, lat) {
+            conn.server.sendLocation("@groupName", lon, lat).done(function () {
+                console.log("Location sent");
+            });
+        }
+
+        function ViewModel(conn, viewer) {
+            var _viewer = viewer;
+            var _this = this;
+            this.IsConnected = ko.observable(false);
+            this.Connect = function () {
+                conn.server.subscribe("@groupName").done(function () {
+                    console.log("connected");
+                    _this.IsConnected(true);
+                })
+            };
+            this.Disconnect = function () {
+                conn.server.unsubscribe("@groupName").done(function () {
+                    console.log("disconnected");
+                    _this.IsConnected(false);
+                });
+            };
+            this.SendMyLocation = function () {
+                navigator.geolocation.getCurrentPosition(function (res) {
+                    Send(res.coords.longitude, res.coords.latitude);
+                });
+            };
+            this.SendViewCenter = function () {
+                var el = document.getElementById("viewer");
+                var cx = el.offsetLeft + (el.clientWidth / 2);
+                var cy = el.offsetTop + (el.clientHeight / 2);
+
+                var ellipsoid = _viewer.scene.globe.ellipsoid;
+                var cartesian = _viewer.camera.pickEllipsoid(new Cesium.Cartesian2(cx, cy), ellipsoid);
+
+                if (cartesian) {
+                    var cartographic = ellipsoid.cartesianToCartographic(cartesian);
+                    var lon = Cesium.Math.toDegrees(cartographic.longitude).toFixed(10);
+                    var lat = Cesium.Math.toDegrees(cartographic.latitude).toFixed(10);
+                    //console.log("Looking at: (" + lon + ", " + lat + ")");
+
+                    Send(lon, lat);
+                } else {
+                    alert("Could get your view center coordinates. Ensure that the planet is in your view (eg. You're not looking into space)");
+                }
+            };
+        }
+
+        var viewModel = null;
+
+        window.onload = function () {
+            var viewer = new Cesium.Viewer("viewer");
+            Cesium.CzmlDataSource.load({ id: "document", version: "1.0" }).then(function (ds) {
+                czmlDS = ds;
+                viewer.dataSources.add(czmlDS);
+
+                $.connection.hub.start().done(function () {
+                    viewModel = new ViewModel(conn, viewer);
+                    ko.applyBindings(viewModel, document.getElementById("controls"));
+                }).fail(function () {
+                    alert("Error. Could not connect to SignalR hub");
+                });
+            });
+        };
+
+    </script>
+</head>
+<body>
+    <div id="viewer">
+        <div id="controls">
+            <button data-bind="disable: IsConnected, click: Connect">Connect</button>
+            <button data-bind="enable: IsConnected, click: Disconnect">Disconnect</button>
+            <button data-bind="enable: IsConnected, click: SendMyLocation">Send My Location</button>
+            <button data-bind="enable: IsConnected, click: SendViewCenter">Send View Center</button>
+        </div>
+    </div>
+</body>
+</html>

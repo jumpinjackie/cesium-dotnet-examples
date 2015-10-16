@@ -43,11 +43,39 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -65,6 +93,10 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="UAParser, Version=1.2.0.0, Culture=neutral, PublicKeyToken=f7377bf021646069, processorArchitecture=MSIL">
+      <HintPath>..\packages\UAParser.1.2.0.0\lib\net35-Client\UAParser.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Razor">
@@ -88,9 +120,6 @@
     <Reference Include="System.Web.Mvc">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Formatting">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -102,18 +131,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\kml\facilities\GroundStation.png" />
-    <Content Include="App_Data\kml\facilities\LaserStation.png" />
-    <Content Include="App_Data\kml\facilities\LaunchPad.png" />
-    <Content Include="App_Data\kml\facilities\LaunchSite.png" />
-    <Content Include="App_Data\kml\facilities\OpticalTrackingStation.png" />
-    <Content Include="App_Data\kml\facilities\RadarStation.png" />
-    <Content Include="App_Data\models\CesiumAir\0_Cesium_Air.png" />
-    <Content Include="App_Data\models\CesiumAir\1_Cesium_Air_Prop.png" />
-    <Content Include="App_Data\models\CesiumGround\images\0_Cesium_Ground-wheel.jpg" />
-    <Content Include="App_Data\models\CesiumGround\images\1_Cesium_Ground-body.jpg" />
-    <Content Include="App_Data\models\CesiumMan\Cesium_Man.jpg" />
-    <Content Include="App_Data\models\CesiumMilkTruck\CesiumMilkTruck.png" />
+    <Content Include="Content\kml\facilities\GroundStation.png" />
+    <Content Include="Content\kml\facilities\LaserStation.png" />
+    <Content Include="Content\kml\facilities\LaunchPad.png" />
+    <Content Include="Content\kml\facilities\LaunchSite.png" />
+    <Content Include="Content\kml\facilities\OpticalTrackingStation.png" />
+    <Content Include="Content\kml\facilities\RadarStation.png" />
+    <Content Include="Content\models\CesiumAir\0_Cesium_Air.png" />
+    <Content Include="Content\models\CesiumAir\1_Cesium_Air_Prop.png" />
+    <Content Include="Content\models\CesiumGround\images\0_Cesium_Ground-wheel.jpg" />
+    <Content Include="Content\models\CesiumGround\images\1_Cesium_Ground-body.jpg" />
+    <Content Include="Content\models\CesiumMan\Cesium_Man.jpg" />
+    <Content Include="Content\models\CesiumMilkTruck\CesiumMilkTruck.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -377,48 +406,52 @@
     <Content Include="Scripts\Cesium\Workers\createWallOutlineGeometry.js" />
     <Content Include="Scripts\Cesium\Workers\transferTypedArrayTest.js" />
     <Content Include="Scripts\Cesium\Workers\upsampleQuantizedTerrainMesh.js" />
-    <Content Include="App_Data\CDD_ZoningDistricts.geojson" />
-    <Content Include="App_Data\HEALTH_HealthClinics.geojson" />
-    <Content Include="App_Data\RECREATION_Playgrounds.geojson" />
-    <Content Include="App_Data\TRANS_Rail.geojson" />
+    <Content Include="Content\CDD_ZoningDistricts.geojson" />
+    <Content Include="Content\HEALTH_HealthClinics.geojson" />
+    <Content Include="Content\RECREATION_Playgrounds.geojson" />
+    <Content Include="Content\TRANS_Rail.geojson" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="App_Data\kml\bikeRide.kml" />
-    <Content Include="App_Data\kml\facilities\facilities.kml" />
-    <Content Include="App_Data\kml\gdpPerCapita2008.kmz" />
-    <Content Include="App_Data\models\CesiumAir\Cesium_Air.bgltf" />
-    <Content Include="App_Data\models\CesiumAir\Cesium_Air.dae" />
-    <Content Include="App_Data\models\CesiumAir\Cesium_Air.gltf" />
-    <Content Include="App_Data\models\CesiumGround\Cesium_Ground.bgltf" />
-    <Content Include="App_Data\models\CesiumGround\Cesium_Ground.dae" />
-    <Content Include="App_Data\models\CesiumGround\Cesium_Ground.gltf" />
-    <Content Include="App_Data\models\CesiumMan\Cesium_Man.bgltf" />
-    <Content Include="App_Data\models\CesiumMan\Cesium_Man.dae" />
-    <Content Include="App_Data\models\CesiumMan\Cesium_Man.gltf" />
-    <Content Include="App_Data\models\CesiumMilkTruck\CesiumMilkTruck.bgltf" />
-    <Content Include="App_Data\models\CesiumMilkTruck\CesiumMilkTruck.dae" />
-    <Content Include="App_Data\models\CesiumMilkTruck\CesiumMilkTruck.gltf" />
-    <Content Include="App_Data\ne_10m_us_states.topojson" />
-    <Content Include="App_Data\population909500.json" />
-    <Content Include="App_Data\simple.czml" />
-    <Content Include="App_Data\simplestyles.geojson" />
-    <Content Include="App_Data\Vehicle.czml" />
+    <Content Include="Content\kml\bikeRide.kml" />
+    <Content Include="Content\kml\facilities\facilities.kml" />
+    <Content Include="Content\kml\gdpPerCapita2008.kmz" />
+    <Content Include="Content\models\CesiumAir\Cesium_Air.bgltf" />
+    <Content Include="Content\models\CesiumAir\Cesium_Air.dae" />
+    <Content Include="Content\models\CesiumAir\Cesium_Air.gltf" />
+    <Content Include="Content\models\CesiumGround\Cesium_Ground.bgltf" />
+    <Content Include="Content\models\CesiumGround\Cesium_Ground.dae" />
+    <Content Include="Content\models\CesiumGround\Cesium_Ground.gltf" />
+    <Content Include="Content\models\CesiumMan\Cesium_Man.bgltf" />
+    <Content Include="Content\models\CesiumMan\Cesium_Man.dae" />
+    <Content Include="Content\models\CesiumMan\Cesium_Man.gltf" />
+    <Content Include="Content\models\CesiumMilkTruck\CesiumMilkTruck.bgltf" />
+    <Content Include="Content\models\CesiumMilkTruck\CesiumMilkTruck.dae" />
+    <Content Include="Content\models\CesiumMilkTruck\CesiumMilkTruck.gltf" />
+    <Content Include="Content\ne_10m_us_states.topojson" />
+    <Content Include="Content\population909500.json" />
+    <Content Include="Content\simple.czml" />
+    <Content Include="Content\simplestyles.geojson" />
+    <Content Include="Content\Vehicle.czml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.0.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DemoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hubs\DemoHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -458,6 +491,9 @@
     <Content Include="Views\Demo\GeoJSON.cshtml" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="Views\Demo\Index.cshtml" />
+    <Content Include="Views\Demo\KML.cshtml" />
+    <Content Include="Views\Demo\CZML.cshtml" />
+    <Content Include="Views\Demo\SignalR.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -465,7 +501,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

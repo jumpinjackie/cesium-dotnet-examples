@@ -9,50 +9,16 @@ namespace CesiumAspNetDemo.Controllers
 {
     public class DemoController : Controller
     {
-        const string JSON_MIME = "application/json";
+        public ActionResult Index() => View();
 
-        public ActionResult Data_Zoning()
-        {
-            FileInfo fi = new FileInfo(Server.MapPath("~/App_Data/CDD_ZoningDistricts.geojson"));
-            return new FileStreamResult(fi.OpenRead(), JSON_MIME);
-        }
+        public ActionResult Hello3DWorld() => View();
 
-        public ActionResult Data_HealthClinics()
-        {
-            FileInfo fi = new FileInfo(Server.MapPath("~/App_Data/HEALTH_HealthClinics.geojson"));
-            return new FileStreamResult(fi.OpenRead(), JSON_MIME);
-        }
+        public ActionResult GeoJSON() => View();
 
-        public ActionResult Data_Playgrounds()
-        {
-            FileInfo fi = new FileInfo(Server.MapPath("~/App_Data/RECREATION_Playgrounds.geojson"));
-            return new FileStreamResult(fi.OpenRead(), JSON_MIME);
-        }
+        public ActionResult KML() => View();
 
-        public ActionResult Data_Rail()
-        {
-            FileInfo fi = new FileInfo(Server.MapPath("~/App_Data/TRANS_Rail.geojson"));
-            return new FileStreamResult(fi.OpenRead(), JSON_MIME);
-        }
+        public ActionResult CZML() => View();
 
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        public ActionResult Hello3DWorld()
-        {
-            return View();
-        }
-
-        public ActionResult GeoJSON()
-        {
-            return View();
-        }
-
-        public ActionResult KML()
-        {
-            return View();
-        }
+        public ActionResult SignalR() => View();
     }
 }
