@@ -1,0 +1,111 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GeoJSON</title>
+    <link rel="stylesheet" href="~/Scripts/Cesium/Widgets/widgets.css" />
+    <style type="text/css">
+        #layers {
+            padding: 8px;
+            background-color: #313098;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 50;
+            color: white;
+        }
+    </style>
+    <script type="text/javascript" src="~/Scripts/Cesium/Cesium.js"></script>
+    <script type="text/javascript">
+
+        var ko = Cesium.knockout;
+
+        function LayersViewModel(viewer) {
+            var _this = this;
+
+            // ----------- Obserable properties ------------- //
+            this.playgroundsVisible = ko.observable(false);
+            this.zoningVisible = ko.observable(false);
+            this.railVisible = ko.observable(false);
+            // ---------------------------------------------- //
+
+            var _viewer = viewer;
+
+            this.loadLayers = function () {
+                var data_playgrounds = null;
+                var p_playgrounds = Cesium.GeoJsonDataSource.load("@Url.Action("Data_Playgrounds", "Demo")");
+            
+                var data_rail = null;
+                var p_rail = Cesium.GeoJsonDataSource.load("@Url.Action("Data_Rail", "Demo")", {
+                    stroke: Cesium.Color.RED,
+                    strokeWidth: 3
+                });
+                var data_zoning = null;
+                var p_zoning = Cesium.GeoJsonDataSource.load("@Url.Action("Data_Zoning", "Demo")", {
+                    fill: Cesium.Color.ORANGE.withAlpha(0.3),
+                    stroke: Cesium.Color.DARKORANGE
+                });
+
+                return Promise.all([p_playgrounds, p_rail, p_zoning]).then(function (dataSources) {
+                    data_playgrounds = dataSources[0];
+                    data_rail = dataSources[1];
+                    data_zoning = dataSources[2];
+
+                    _this.playgroundsVisible.subscribe(function (newVal) {
+                        _this.toggleDataSource(data_playgrounds);
+                    });
+                    _this.zoningVisible.subscribe(function (newVal) {
+                        _this.toggleDataSource(data_zoning);
+                    });
+                    _this.railVisible.subscribe(function (newVal) {
+                        _this.toggleDataSource(data_rail);
+                    });
+                });
+            };
+
+            // ---------- public ---------- //
+            this.toggleDataSource = function (dataSource) {
+                if (_viewer.dataSources.contains(dataSource)) {
+                    _viewer.dataSources.remove(dataSource);
+                } else {
+                    _viewer.dataSources.add(dataSource);
+                }
+            };
+            // ---------------------------- //
+        }
+
+        window.onload = function () {
+            var viewer = new Cesium.Viewer("viewer");
+            viewer.scene.camera.flyTo({
+                //Fly to Cambridge, MA, USA
+                destination: Cesium.Cartesian3.fromDegrees(-71.10973349999999, 42.3736158, 15000.0)
+            });
+
+            var viewModel = new LayersViewModel(viewer);
+            viewModel.loadLayers().then(function () {
+                ko.applyBindings(viewModel, document.getElementById("layers"));
+                viewModel.zoningVisible(true);
+            });
+        };
+
+    </script>
+</head>
+<body>
+    <div id="viewer">
+        <div id="layers">
+            <div>
+                <input type="checkbox" data-bind="checked: playgroundsVisible" /> Playgrounds
+            </div>
+            <div>
+                <input type="checkbox" data-bind="checked: zoningVisible" /> Zoning
+            </div>
+            <div>
+                <input type="checkbox" data-bind="checked: railVisible" /> Rail
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -102,7 +102,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Cesium\Assets\Textures\maki\airfield.png" />
     <Content Include="Scripts\Cesium\Assets\Textures\maki\airport.png" />
     <Content Include="Scripts\Cesium\Assets\Textures\maki\alcohol-shop.png" />
@@ -357,6 +363,13 @@
     <Content Include="Scripts\Cesium\Workers\createWallOutlineGeometry.js" />
     <Content Include="Scripts\Cesium\Workers\transferTypedArrayTest.js" />
     <Content Include="Scripts\Cesium\Workers\upsampleQuantizedTerrainMesh.js" />
+    <Content Include="App_Data\CDD_ZoningDistricts.geojson" />
+    <Content Include="App_Data\HEALTH_HealthClinics.geojson" />
+    <Content Include="App_Data\RECREATION_Playgrounds.geojson" />
+    <Content Include="App_Data\TRANS_Rail.geojson" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -400,6 +413,13 @@
     <Content Include="Scripts\Cesium\Assets\IAU2006_XYS\IAU2006_XYS_7.json" />
     <Content Include="Scripts\Cesium\Assets\IAU2006_XYS\IAU2006_XYS_8.json" />
     <Content Include="Scripts\Cesium\Assets\IAU2006_XYS\IAU2006_XYS_9.json" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Demo\GeoJSON.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -408,7 +428,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
