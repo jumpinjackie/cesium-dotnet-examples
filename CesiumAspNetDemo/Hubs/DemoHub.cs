@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,14 +9,34 @@ using System.Web;
 
 namespace CesiumAspNetDemo.Hubs
 {
+    class UserProfile
+    {
+        public string Name { get; set; }
+        public string Color { get; set; }
+    }
+
     [HubName("DemoHub")]
     public class DemoHub : Hub
     {
-        public Task Subscribe(string groupName) => Groups.Add(Context.ConnectionId, groupName);
+        static string RandomColor()
+        {
+            var random = new Random();
+            return string.Format("#{0:X6}", random.Next(0x1000000));
+        }
 
-        public Task Unsubscribe(string groupName) => Groups.Remove(Context.ConnectionId, groupName);
+        public async Task Subscribe(string groupName)
+        {
+            await Groups.Add(Context.ConnectionId, groupName);
+            await Clients.Caller.OnSubscribed(groupName);
+        }
 
-        public void SendLocation(string groupName, double longitude, double latitude)
+        public async Task Unsubscribe(string groupName)
+        {
+            await Groups.Remove(Context.ConnectionId, groupName);
+            await Clients.Caller.OnUnsubscribed(groupName);
+        }
+
+        public async Task SendLocation(string groupName, string name, string color, double longitude, double latitude)
         {
             var userAgent = this.Context.Request.Headers["User-Agent"];
             var parser = UAParser.Parser.GetDefault();
@@ -24,6 +45,8 @@ namespace CesiumAspNetDemo.Hubs
             var response = new
             {
                 ClientID = Context.ConnectionId,
+                Name = name,
+                UserColor = color,
                 Browser = clientInfo.UserAgent.Family,
                 BrowserVersion = $"{clientInfo.UserAgent.Major}.{clientInfo.UserAgent.Minor}.{clientInfo.UserAgent.Patch}",
                 OS = clientInfo.OS.Family,
@@ -35,7 +58,7 @@ namespace CesiumAspNetDemo.Hubs
             };
 
             //Send this information to interested subscribers
-            Clients.OthersInGroup(groupName).NewLocation(response);
+            await Clients.OthersInGroup(groupName).NewLocation(response);
         }
     }
 }

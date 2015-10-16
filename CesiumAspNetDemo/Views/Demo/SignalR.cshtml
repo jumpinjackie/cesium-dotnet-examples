@@ -44,17 +44,45 @@
             return html;
         }
 
+        function RandomColor() {
+            var letters = '0123456789ABCDEF'.split('');
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function HtmlColorToRgba(data) {
+            var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(data.UserColor);
+            return result ? [
+                parseInt(result[1], 16),    //r
+                parseInt(result[2], 16),    //g
+                parseInt(result[3], 16),    //b
+                255                         //a
+            ] : null;
+        }
+
         function DataToCzmlPacket(data) {
             return [{
                 id: data.ClientID,
                 description: FormatDescription(data),
                 point: {
                     color: {
-                        rgba: [255, 0, 0, 255]
+                        rgba: HtmlColorToRgba(data)
                     },
                     pixelSize: {
                         number: 8
                     }
+                },
+                label: {
+                    horizontalOrigin: {
+                        horizontalOrigin: "LEFT"
+                    },
+                    scale: {
+                        number: 0.7
+                    },
+                    text: data.Name + " (" + data.Browser + ", " + data.OS + ")"
                 },
                 position: {
                     cartographicDegrees: [
@@ -73,9 +101,20 @@
                 console.log("Map updated");
             });
         };
+        conn.client.OnSubscribed = function (groupName) {
+            console.log("subscribed to: " + groupName);
+            viewModel.IsConnected(true);
+            viewModel.Color(RandomColor());
+        };
+        conn.client.OnUnsubscribed = function (groupName) {
+            console.log("disconnected from: " + groupName);
+            viewModel.IsConnected(false);
+            viewModel.Name(null);
+            viewModel.Color(null);
+        }
 
         function Send(lon, lat) {
-            conn.server.sendLocation("@groupName", lon, lat).done(function () {
+            conn.server.sendLocation("@groupName", viewModel.Name(), viewModel.Color(), lon, lat).done(function () {
                 console.log("Location sent");
             });
         }
@@ -83,18 +122,22 @@
         function ViewModel(conn, viewer) {
             var _viewer = viewer;
             var _this = this;
+
+            this.Name = ko.observable(null);
+            this.Color = ko.observable(null);
+
             this.IsConnected = ko.observable(false);
             this.Connect = function () {
-                conn.server.subscribe("@groupName").done(function () {
-                    console.log("connected");
-                    _this.IsConnected(true);
-                })
+                var name = prompt("What is your name?");
+                if (name == null) {
+                    alert("A name is required to continue");
+                    return;
+                }
+                _this.Name(name);
+                conn.server.subscribe("@groupName");
             };
             this.Disconnect = function () {
-                conn.server.unsubscribe("@groupName").done(function () {
-                    console.log("disconnected");
-                    _this.IsConnected(false);
-                });
+                conn.server.unsubscribe("@groupName");
             };
             this.SendMyLocation = function () {
                 navigator.geolocation.getCurrentPosition(function (res) {
@@ -117,7 +160,7 @@
 
                     Send(lon, lat);
                 } else {
-                    alert("Could get your view center coordinates. Ensure that the planet is in your view (eg. You're not looking into space)");
+                    alert("Could get your view center coordinates. Ensure that some part of Earth is in your center view (eg. You're not looking into space)");
                 }
             };
         }
