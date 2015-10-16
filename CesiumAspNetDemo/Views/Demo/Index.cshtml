@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+<div class="jumbotron">
+    <h1>Cesium .net Demos</h1>
+    <p class="lead">Cesium is a JavaScript library for creating 3D globes and 2D maps in a web browser without a plugin</p>
+    <p>This site demonstrates various ways to use Cesium with ASP.net</p>
+    <p><a href="https://cesiumjs.org/" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Hello 3D World</h2>
+        <p>This demo demonstrates a minimal Cesium viewer</p>
+        <p><a class="btn btn-default" href="@Url.Action("Hello3DWorld", "Demo")">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>GeoJSON</h2>
+        <p>This demo demonstrates Cesium with some GeoJSON data sources</p>
+        <p><a class="btn btn-default" href="@Url.Action("GeoJSON", "Demo")">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>CZML</h2>
+        <p>This demo demonstrates the Cesium Markup Language (CZML)</p>
+        <p><a class="btn btn-default" href="@Url.Action("CZML", "Demo")">Learn more &raquo;</a></p>
+    </div>
+</div>

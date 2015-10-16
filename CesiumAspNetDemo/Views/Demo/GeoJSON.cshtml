@@ -17,6 +17,13 @@
             z-index: 50;
             color: white;
         }
+        #viewer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
     </style>
     <script type="text/javascript" src="~/Scripts/Cesium/Cesium.js"></script>
     <script type="text/javascript">
@@ -105,6 +112,7 @@
             <div>
                 <input type="checkbox" data-bind="checked: railVisible" /> Rail
             </div>
+            <a href="@Url.Action("Index", "Demo")">Return to Demos</a>
         </div>
     </div>
 </body>
