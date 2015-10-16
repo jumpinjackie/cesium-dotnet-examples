@@ -1,0 +1,5 @@
+/.vs
+/packages
+/CesiumAspNetDemo/*.user
+/CesiumAspNetDemo/bin
+/CesiumAspNetDemo/obj
