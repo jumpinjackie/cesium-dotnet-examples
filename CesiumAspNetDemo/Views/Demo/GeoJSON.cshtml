@@ -56,7 +56,7 @@
                     stroke: Cesium.Color.DARKORANGE
                 });
 
-                return Promise.all([p_playgrounds, p_rail, p_zoning]).then(function (dataSources) {
+                return Cesium.when.all([p_playgrounds, p_rail, p_zoning]).then(function (dataSources) {
                     data_playgrounds = dataSources[0];
                     data_rail = dataSources[1];
                     data_zoning = dataSources[2];

@@ -50,7 +50,7 @@
                 var data_gdp = null;
                 var p_gdp = Cesium.KmlDataSource.load("@Url.Content("~/Content/kml/gdpPerCapita2008.kmz")");
 
-                return Promise.all([p_facilities, p_gdp]).then(function (dataSources) {
+                return Cesium.when.all([p_facilities, p_gdp]).then(function (dataSources) {
                     data_facilities = dataSources[0];
                     data_gdp = dataSources[1];
 
