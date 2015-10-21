@@ -17,13 +17,15 @@
             z-index: 50;
             color: white;
         }
-
         #viewer {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
+        }
+        .home-link {
+            color: #ffffff;
         }
     </style>
     <script type="text/javascript" src="~/Scripts/Cesium/Cesium.js"></script>
@@ -93,7 +95,7 @@
             <div>
                 <input type="checkbox" data-bind="checked: gdpVisible" /> Country GDP
             </div>
-            <a href="@Url.Action("Index", "Demo")">Return to Demos</a>
+            <a class="home-link" href="@Url.Action("Index", "Demo")">Return to Demos</a>
         </div>
     </div>
 </body>

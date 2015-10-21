@@ -20,5 +20,7 @@ namespace CesiumAspNetDemo.Controllers
         public ActionResult CZML() => View();
 
         public ActionResult SignalR() => View();
+
+        public ActionResult CZML4D() => View();
     }
 }

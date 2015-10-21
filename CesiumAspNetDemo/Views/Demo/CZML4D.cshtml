@@ -1,0 +1,89 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CZML 4D</title>
+    <style type="text/css">
+        #viewer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        #legend {
+            padding: 8px;
+            background-color: #313098;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 50;
+            color: white;
+        }
+        .legend {
+            border: 1px solid black;
+        }
+        .legend-labor {
+            background-color: #ff0000;
+        }
+        .legend-coal {
+            background-color: #0000ff;
+        }
+        .legend-greens {
+            background-color: #00ff00;
+        }
+        .legend-grey {
+            background-color: #808080;
+        }
+        .legend-none {
+            background-color: #ffffff;
+        }
+        .home-link {
+            color: #ffffff;
+        }
+        .attribution {
+            font-size: 8pt;
+        }
+    </style>
+    <link rel="stylesheet" href="~/Scripts/Cesium/Widgets/widgets.css" />
+    <script type="text/javascript" src="~/Scripts/Cesium/Cesium.js"></script>
+    <script type="text/javascript">
+
+        window.onload = function () {
+            var viewer = new Cesium.Viewer("viewer");
+            //Start view in Australia
+            var rect = Cesium.Rectangle.fromDegrees(112.85, -43.7, 153.69, -9.86);
+            viewer.scene.camera.viewRectangle(rect);
+            viewer.dataSources.add(Cesium.CzmlDataSource.load("@Url.Content("~/Content/elections.czml")"));
+        };
+
+    </script>
+</head>
+<body>
+    <div id="viewer">
+        <div id="legend">
+            <div>
+                <span class="legend legend-labor">&nbsp;&nbsp;&nbsp;</span> Australian Labor Party
+            </div>
+            <div>
+                <span class="legend legend-coal">&nbsp;&nbsp;&nbsp;</span> Coalition
+            </div>
+            <div>
+                <span class="legend legend-greens">&nbsp;&nbsp;&nbsp;</span> Greens
+            </div>
+            <div>
+                <span class="legend legend-grey">&nbsp;&nbsp;&nbsp;</span> Other
+            </div>
+            <div>
+                <span class="legend legend-none">&nbsp;&nbsp;&nbsp;</span> Electorate did not exist
+            </div>
+            <a class="home-link" href="@Url.Action("Index", "Demo")">Return to Demos</a>
+            <p class="attribution">This product (CZML 4D Demo) incorporates data that is:</p>
+            <p class="attribution">© Commonwealth of Australia (<a class="home-link" href="http://www.aec.gov.au/">Australian Electoral Commission</a>)2015</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -15,7 +15,7 @@ namespace CesiumAspNetDemo.Hubs
         public string Color { get; set; }
     }
 
-    [HubName("DemoHub")]
+    [HubName(nameof(DemoHub))]
     public class DemoHub : Hub
     {
         static string RandomColor()

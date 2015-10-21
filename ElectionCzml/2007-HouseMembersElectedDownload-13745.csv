@@ -1,0 +1,151 @@
+DivisionID,DivisionNm,StateAb,CandidateID,GivenNm,Surname,PartyNm,PartyAb
+179,Adelaide,SA,17694,Kate,ELLIS,Australian Labor Party,ALP
+197,Aston,VIC,17236,Chris,PEARCE,Liberal,LP
+198,Ballarat,VIC,18094,Catherine,KING,Australian Labor Party,ALP
+103,Banks,NSW,18021,Daryl,MELHAM,Australian Labor Party,ALP
+180,Barker,SA,17668,Patrick,SECKER,Liberal,LP
+104,Barton,NSW,18038,Robert,McCLELLAND,Australian Labor Party,ALP
+192,Bass,TAS,17495,Jodie,CAMPBELL,Australian Labor Party,ALP
+199,Batman,VIC,18024,Martin,FERGUSON,Australian Labor Party,ALP
+200,Bendigo,VIC,18031,Steve,GIBBONS,Australian Labor Party,ALP
+105,Bennelong,NSW,18018,Maxine,McKEW,Australian Labor Party,ALP
+106,Berowra,NSW,17873,Philip,RUDDOCK,Liberal,LP
+304,Blair,QLD,17504,Shayne Kenneth,NEUMANN,Australian Labor Party,ALP
+107,Blaxland,NSW,18160,Jason,CLARE,Australian Labor Party,ALP
+310,Bonner,QLD,17612,Kerry,REA,Australian Labor Party,ALP
+182,Boothby,SA,17678,Andrew,SOUTHCOTT,Liberal,LP
+155,Bowman,QLD,17714,Andrew,LAMING,Liberal,LP
+193,Braddon,TAS,17521,Sid,SIDEBOTTOM,Australian Labor Party,ALP
+108,Bradfield,NSW,17850,Brendan,NELSON,Liberal,LP
+235,Brand,WA,17456,Gary,GRAY,Australian Labor Party,ALP
+156,Brisbane,QLD,17509,Arch,BEVIS,Australian Labor Party,ALP
+201,Bruce,VIC,18035,Alan,GRIFFIN,Australian Labor Party,ALP
+109,Calare,NSW,17206,John,COBB,The Nationals,NP
+203,Calwell,VIC,18045,Maria,VAMVAKINOU,Australian Labor Party,ALP
+101,Canberra,ACT,17614,Annette,ELLIS,Australian Labor Party,ALP
+236,Canning,WA,17223,Don,RANDALL,Liberal,LP
+157,Capricornia,QLD,17506,Kirsten,LIVERMORE,Australian Labor Party,ALP
+204,Casey,VIC,17276,Tony,SMITH,Liberal,LP
+110,Charlton,NSW,18085,Greg,COMBET,Australian Labor Party,ALP
+111,Chifley,NSW,18042,Roger,PRICE,Australian Labor Party,ALP
+205,Chisholm,VIC,18049,Anna,BURKE,Australian Labor Party,ALP
+112,Cook,NSW,17914,Scott,MORRISON,Liberal,LP
+207,Corangamite,VIC,18083,Darren,CHEESEMAN,Australian Labor Party,ALP
+208,Corio,VIC,18033,Richard,MARLES,Australian Labor Party,ALP
+237,Cowan,WA,17211,Luke,SIMPKINS,Liberal,LP
+113,Cowper,NSW,17201,Luke,HARTSUYKER,The Nationals,NP
+114,Cunningham,NSW,18098,Sharon,BIRD,Australian Labor Party,ALP
+238,Curtin,WA,17212,Julie,BISHOP,Liberal,LP
+158,Dawson,QLD,17505,James,BIDGOOD,Australian Labor Party,ALP
+209,Deakin,VIC,18060,Mike,SYMON,Australian Labor Party,ALP
+194,Denison,TAS,17498,Duncan,KERR,Australian Labor Party,ALP
+252,Dickson,QLD,17745,Peter,DUTTON,Liberal,LP
+115,Dobell,NSW,18023,Craig,THOMSON,Australian Labor Party,ALP
+210,Dunkley,VIC,17252,Bruce,BILLSON,Liberal,LP
+117,Eden-Monaro,NSW,18043,Mike,KELLY,Australian Labor Party,ALP
+159,Fadden,QLD,17709,Stuart,ROBERT,Liberal,LP
+160,Fairfax,QLD,17743,Alex,SOMLYAY,Liberal,LP
+118,Farrer,NSW,17852,Sussan,LEY,Liberal,LP
+161,Fisher,QLD,17764,Peter,SLIPPER,Liberal,LP
+211,Flinders,VIC,17291,Greg,HUNT,Liberal,LP
+311,Flynn,QLD,17507,Chris,TREVOR,Australian Labor Party,ALP
+162,Forde,QLD,17525,Brett Blair,RAGUSE,Australian Labor Party,ALP
+239,Forrest,WA,17220,Nola,MARINO,Liberal,LP
+119,Fowler,NSW,18113,Julia,IRWIN,Australian Labor Party,ALP
+195,Franklin,TAS,17499,Julie,COLLINS,Australian Labor Party,ALP
+102,Fraser,ACT,17613,Bob,McMULLAN,Australian Labor Party,ALP
+240,Fremantle,WA,17470,Melissa,PARKE,Australian Labor Party,ALP
+212,Gellibrand,VIC,18126,Nicola,ROXON,Australian Labor Party,ALP
+120,Gilmore,NSW,17879,Joanna,GASH,Liberal,LP
+213,Gippsland,VIC,17307,Peter,McGAURAN,The Nationals,NP
+214,Goldstein,VIC,17263,Andrew,ROBB,Liberal,LP
+309,Gorton,VIC,18141,Brendan,O'CONNOR,Australian Labor Party,ALP
+121,Grayndler,NSW,18196,Anthony,ALBANESE,Australian Labor Party,ALP
+122,Greenway,NSW,17861,Louise,MARKUS,Liberal,LP
+183,Grey,SA,17679,Rowan,RAMSEY,Liberal,LP
+163,Griffith,QLD,17526,Kevin,RUDD,Australian Labor Party,ALP
+164,Groom,QLD,17792,Ian,MACFARLANE,Liberal,LP
+305,Hasluck,WA,17471,Sharryn,JACKSON,Australian Labor Party,ALP
+165,Herbert,QLD,17726,Peter,LINDSAY,Liberal,LP
+215,Higgins,VIC,17294,Peter,COSTELLO,Liberal,LP
+185,Hindmarsh,SA,17787,Steve,GEORGANAS,Australian Labor Party,ALP
+166,Hinkler,QLD,17161,Paul,NEVILLE,The Nationals,NP
+216,Holt,VIC,18358,Anthony,BYRNE,Australian Labor Party,ALP
+217,Hotham,VIC,18189,Simon,CREAN,Australian Labor Party,ALP
+124,Hughes,NSW,17863,Danna,VALE,Liberal,LP
+125,Hume,NSW,17952,Alby,SCHULTZ,Liberal,LP
+126,Hunter,NSW,18040,Joel,FITZGIBBON,Australian Labor Party,ALP
+218,Indi,VIC,17274,Sophie,MIRABELLA,Liberal,LP
+219,Isaacs,VIC,18048,Mark,DREYFUS,Australian Labor Party,ALP
+220,Jagajaga,VIC,18074,Jenny,MACKLIN,Australian Labor Party,ALP
+241,Kalgoorlie,WA,17224,Barry,HAASE,Liberal,LP
+167,Kennedy,QLD,13270,Bob,KATTER,Independent,IND
+127,Kingsford Smith,NSW,18120,Peter,GARRETT,Australian Labor Party,ALP
+186,Kingston,SA,17707,Amanda,RISHWORTH,Australian Labor Party,ALP
+221,Kooyong,VIC,17267,Petro,GEORGIOU,Liberal,LP
+223,La Trobe,VIC,17259,Jason,WOOD,Liberal,LP
+222,Lalor,VIC,18108,Julia,GILLARD,Australian Labor Party,ALP
+168,Leichhardt,QLD,17515,Jim,TURNOUR,Australian Labor Party,ALP
+169,Lilley,QLD,17516,Wayne,SWAN,Australian Labor Party,ALP
+128,Lindsay,NSW,18125,David,BRADBURY,Australian Labor Party,ALP
+306,Lingiari,NT,17531,Warren,SNOWDON,Australian Labor Party,ALP
+302,Longman,QLD,17534,Jon,SULLIVAN,Australian Labor Party,ALP
+129,Lowe,NSW,18073,John,MURPHY,Australian Labor Party,ALP
+130,Lyne,NSW,17198,Mark,VAILE,The Nationals,NP
+196,Lyons,TAS,17500,Dick,ADAMS,Australian Labor Party,ALP
+131,Macarthur,NSW,18075,Pat,FARMER,Liberal,LP
+132,Mackellar,NSW,17868,Bronwyn,BISHOP,Liberal,LP
+133,Macquarie,NSW,18087,Bob,DEBUS,Australian Labor Party,ALP
+187,Makin,SA,17939,Tony,ZAPPIA,Australian Labor Party,ALP
+224,Mallee,VIC,17297,John,FORREST,The Nationals,NP
+170,Maranoa,QLD,17173,Bruce,SCOTT,The Nationals,NP
+225,Maribyrnong,VIC,18059,Bill,SHORTEN,Australian Labor Party,ALP
+188,Mayo,SA,17653,Alexander,DOWNER,Liberal,LP
+226,McEwen,VIC,17265,Fran,BAILEY,Liberal,LP
+227,McMillan,VIC,17251,Russell,BROADBENT,Liberal,LP
+171,McPherson,QLD,17753,Margaret,MAY,Liberal,LP
+228,Melbourne,VIC,18091,Lindsay,TANNER,Australian Labor Party,ALP
+230,Melbourne Ports,VIC,18093,Michael,DANBY,Australian Labor Party,ALP
+229,Menzies,VIC,17256,Kevin,ANDREWS,Liberal,LP
+134,Mitchell,NSW,17899,Alex,HAWKE,Liberal,LP
+172,Moncrieff,QLD,17746,Steven,CIOBO,Liberal,LP
+242,Moore,WA,17216,Mal,WASHER,Liberal,LP
+173,Moreton,QLD,17532,Graham,PERRETT,Australian Labor Party,ALP
+231,Murray,VIC,17258,Sharman,STONE,Liberal,LP
+135,New England,NSW,13274,Tony,WINDSOR,Independent,IND
+136,Newcastle,NSW,18084,Sharon,GRIERSON,Australian Labor Party,ALP
+137,North Sydney,NSW,17876,Joe,HOCKEY,Liberal,LP
+243,O'Connor,WA,17208,Wilson,TUCKEY,Liberal,LP
+174,Oxley,QLD,17517,Bernie,RIPOLL,Australian Labor Party,ALP
+138,Page,NSW,18214,Janelle,SAFFIN,Australian Labor Party,ALP
+139,Parkes,NSW,17204,Mark,COULTON,The Nationals,NP
+140,Parramatta,NSW,18069,Julie,OWENS,Australian Labor Party,ALP
+249,Paterson,NSW,17859,Bob,BALDWIN,Liberal,LP
+244,Pearce,WA,17219,Judi,MOYLAN,Liberal,LP
+245,Perth,WA,17480,Stephen,SMITH,Australian Labor Party,ALP
+175,Petrie,QLD,17595,Yvette,D'ATH,Australian Labor Party,ALP
+189,Port Adelaide,SA,17750,Mark,BUTLER,Australian Labor Party,ALP
+142,Prospect,NSW,18156,Chris,BOWEN,Australian Labor Party,ALP
+176,Rankin,QLD,17535,Craig,EMERSON,Australian Labor Party,ALP
+144,Reid,NSW,18202,Laurie,FERGUSON,Australian Labor Party,ALP
+145,Richmond,NSW,18050,Justine,ELLIOT,Australian Labor Party,ALP
+250,Riverina,NSW,17205,Kay,HULL,The Nationals,NP
+146,Robertson,NSW,18082,Belinda,NEAL,Australian Labor Party,ALP
+177,Ryan,QLD,17736,Michael,JOHNSON,Liberal,LP
+232,Scullin,VIC,18116,Harry,JENKINS,Australian Labor Party,ALP
+148,Shortland,NSW,18061,Jill,HALL,Australian Labor Party,ALP
+307,Solomon,NT,17529,Damian,HALE,Australian Labor Party,ALP
+246,Stirling,WA,17210,Michael,KEENAN,Liberal,LP
+190,Sturt,SA,17723,Christopher,PYNE,Liberal,LP
+247,Swan,WA,17214,Steve,IRONS,Liberal,LP
+149,Sydney,NSW,18088,Tanya,PLIBERSEK,Australian Labor Party,ALP
+248,Tangney,WA,17213,Dennis,JENSEN,Liberal,LP
+150,Throsby,NSW,18068,Jennie,GEORGE,Australian Labor Party,ALP
+191,Wakefield,SA,17731,Nick,CHAMPION,Australian Labor Party,ALP
+233,Wannon,VIC,17271,David,HAWKER,Liberal,LP
+151,Warringah,NSW,18029,Tony,ABBOTT,Liberal,LP
+251,Watson,NSW,18199,Tony,BURKE,Australian Labor Party,ALP
+152,Wentworth,NSW,17882,Malcolm,TURNBULL,Liberal,LP
+153,Werriwa,NSW,18244,Chris,HAYES,Australian Labor Party,ALP
+178,Wide Bay,QLD,17160,Warren,TRUSS,The Nationals,NP
+234,Wills,VIC,18065,Kelvin,THOMSON,Australian Labor Party,ALP
