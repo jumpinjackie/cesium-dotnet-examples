@@ -74,6 +74,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="2004-HouseTppByDivisionDownload-12246.csv" />
+    <None Include="2007-HouseTppByDivisionDownload-13745.csv" />
+    <None Include="2008-Gippsland-HouseTppByPollingPlaceDownload-13813.csv" />
+    <None Include="2008-Lyne-HouseTppByPollingPlaceDownload-13827.csv" />
+    <None Include="2008-Mayo-HouseTppByPollingPlaceDownload-13826.csv" />
+    <None Include="2009-Bradfield-HouseTppByPollingPlaceDownload-14357.csv" />
+    <None Include="2009-Higgins-HouseTppByPollingPlaceDownload-14358.csv" />
+    <None Include="2010-HouseTppByDivisionDownload-15508.csv" />
+    <None Include="2013-HouseTppByDivisionDownload-17496.csv" />
+    <None Include="2014-Griffith-HouseTppByPollingPlaceDownload-17552.csv" />
     <None Include="App.config" />
     <None Include="2004-HouseMembersElectedDownload-12246.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

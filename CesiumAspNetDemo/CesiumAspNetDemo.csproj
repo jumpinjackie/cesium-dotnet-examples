@@ -747,6 +747,7 @@
     <Content Include="Scripts\CesiumUnminified\Assets\IAU2006_XYS\IAU2006_XYS_7.json" />
     <Content Include="Scripts\CesiumUnminified\Assets\IAU2006_XYS\IAU2006_XYS_8.json" />
     <Content Include="Scripts\CesiumUnminified\Assets\IAU2006_XYS\IAU2006_XYS_9.json" />
+    <Content Include="Content\elections.czml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
