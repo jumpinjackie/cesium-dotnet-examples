@@ -12,13 +12,17 @@ namespace ElectionCzml
         //Key - Division, Value - Election result
         private Dictionary<int, List<DatedElectionResult>> _results;
 
-        //Key - Divison Name - Value - Division ID
+        //Key - Divison Name, Value - Division ID
         private Dictionary<string, int> _divIdToNameMap;
+
+        //Key - Divison Name, Value - TPP result
+        private Dictionary<string, List<DatedTPPResult>> _tpp;
 
         public ElectionResultSet()
         {
             _results = new Dictionary<int, List<DatedElectionResult>>();
             _divIdToNameMap = new Dictionary<string, int>();
+            _tpp = new Dictionary<string, List<DatedTPPResult>>();
         }
 
         public string[] GetParties()
@@ -40,7 +44,29 @@ namespace ElectionCzml
                     _divIdToNameMap[nname] = result.DivisionID;
             }
         }
+
+        public void LoadTPPResults<T>(DateTime date, IEnumerable<T> results) where T : ITPPResult
+        {
+            foreach (var result in results)
+            {
+                string nname = result.DivisionNm.ToLower();
+                if (!_tpp.ContainsKey(nname))
+                    _tpp[nname] = new List<DatedTPPResult>();
+
+                _tpp[nname].Add(new DatedTPPResult(date, result));
+            }
+        }
         
+        public DatedTPPResult[] GetTPPForDivison(string name)
+        {
+            string nname = name.ToLower();
+            if (_tpp.ContainsKey(nname))
+            {
+                return _tpp[nname].OrderBy(r => r.ElectionDate).ToArray();
+            }
+            return new DatedTPPResult[0];
+        }
+
         public DatedElectionResult[] GetResultsForDivison(string name)
         {
             string nname = name.ToLower();
@@ -54,6 +80,137 @@ namespace ElectionCzml
             }
             return new DatedElectionResult[0];
         }
+    }
+
+    public interface ITPPResult
+    {
+        string DivisionNm { get; }
+
+        int CoalitionVotes { get; }
+
+        double CoalitionPc { get; }
+
+        int LaborVotes { get; }
+
+        double LaborPc { get; }
+
+        int TotalVotes { get; }
+
+        double Swing { get; }
+    }
+
+    public class DatedTPPResult : ITPPResult
+    {
+        public DatedTPPResult(DateTime date, ITPPResult result)
+        {
+            this.ElectionDate = date;
+            this.DivisionNm = result.DivisionNm;
+            this.CoalitionPc = result.CoalitionPc;
+            this.CoalitionVotes = result.CoalitionVotes;
+            this.LaborPc = result.LaborPc;
+            this.LaborVotes = result.LaborVotes;
+            this.Swing = result.Swing;
+            this.TotalVotes = result.TotalVotes;
+        }
+
+        public DateTime ElectionDate { get; set; }
+
+        public string DivisionNm { get; set; }
+
+        public int CoalitionVotes { get; set; }
+
+        public double CoalitionPc { get; set; }
+
+        public int LaborVotes { get; set; }
+
+        public double LaborPc { get; set; }
+
+        public int TotalVotes { get; set; }
+
+        public double Swing { get; set; }
+    }
+
+    public class ByElectionPollingBoothTPPResultClassMap : CsvClassMap<ByElectionPollingBoothTPPResult>
+    {
+        public ByElectionPollingBoothTPPResultClassMap()
+        {
+            Map(m => m.StateAb);
+            Map(m => m.DivisionID);
+            Map(m => m.DivisionNm);
+            Map(m => m.PollingPlaceID);
+            Map(m => m.PollingPlace);
+            Map(m => m.LaborVotes).Name("Australian Labor Party Votes");
+            Map(m => m.LaborPc).Name("Australian Labor Party Percentage");
+            Map(m => m.CoalitionVotes).Name("Liberal/National Coalition Votes");
+            Map(m => m.CoalitionPc).Name("Liberal/National Coalition Percentage");
+            Map(m => m.TotalVotes);
+            Map(m => m.Swing);
+        }
+    }
+
+    public class ByElectionPollingBoothTPPResult : ITPPResult
+    {
+        public string StateAb { get; set; }
+
+        public int DivisionID { get; set; }
+
+        public string DivisionNm { get; set; }
+
+        public int PollingPlaceID { get; set; }
+
+        public string PollingPlace { get; set; }
+
+        public int CoalitionVotes { get; set; }
+
+        public double CoalitionPc { get; set; }
+
+        public int LaborVotes { get; set; }
+
+        public double LaborPc { get; set; }
+
+        public int TotalVotes { get; set; }
+
+        public double Swing { get; set; }
+    }
+
+    public class FederalTPPResultClassMap : CsvClassMap<FederalTPPResult>
+    {
+        public FederalTPPResultClassMap()
+        {
+            Map(m => m.DivisionID);
+            Map(m => m.DivisionNm);
+            Map(m => m.StateAb);
+            Map(m => m.PartyAb);
+            Map(m => m.CoalitionVotes).Name("Liberal/National Coalition Votes");
+            Map(m => m.CoalitionPc).Name("Liberal/National Coalition Percentage");
+            Map(m => m.LaborVotes).Name("Australian Labor Party Votes");
+            Map(m => m.LaborPc).Name("Australian Labor Party Percentage");
+            Map(m => m.TotalVotes);
+            Map(m => m.Swing);
+        }
+    }
+
+    public class FederalTPPResult : ITPPResult
+    {
+        public int DivisionID { get; set; }
+
+        public string DivisionNm { get; set; }
+
+        public string StateAb { get; set; }
+
+        public string PartyAb { get; set; }
+
+        public int CoalitionVotes { get; set; }
+
+        public double CoalitionPc { get; set; }
+
+        public int LaborVotes { get; set; }
+
+        public double LaborPc { get; set; }
+
+        public int TotalVotes { get; set; }
+
+        public double Swing { get; set; }
     }
     
     public interface IElectionResult

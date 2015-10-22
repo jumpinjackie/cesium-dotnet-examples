@@ -66,6 +66,8 @@ namespace ElectionCzml
 
         //static Dictionary<string, double> _areas = new Dictionary<string, double>();
 
+        //This value was determined through a test run with geometric areas collected and sampling the
+        //smallest value among the biggest values of each electorate
         const double MIN_AREA = 0.0028;
 
         static void WriteComponentGeometryFragment(JsonTextWriter writer, Geometry geom, string name, DatedElectionResult[] results, int? no = null)
@@ -159,7 +161,7 @@ namespace ElectionCzml
                                 writer.WriteStartArray();
                                 {
                                     //HACK: This example doesn't take into account that electorate redistribution occurs
-                                    //Meaning that our 2013 snapshot of Australian Federal Electorates may contain electorates
+                                    //Meaning that our 2015 snapshot of Australian Federal Electorates may contain electorates
                                     //that either have changed or did not exist in earlier Federal Elections. Since the AEC does
                                     //not publicly provide such data, we'll denote such electorates as unknown (White)
                                     //
@@ -296,6 +298,23 @@ namespace ElectionCzml
             }
         }
 
+        class InputFile
+        {
+            public DateTime Date { get; set; }
+
+            public StreamReader Source { get; set; }
+
+            public StreamReader TPPSource { get; set; }
+
+            public bool General { get; set; }
+
+            public void Close()
+            {
+                Source?.Close();
+                TPPSource?.Close();
+            }
+        }
+
         static void Main(string[] args)
         {
             GdalConfiguration.ConfigureOgr();
@@ -304,90 +323,121 @@ namespace ElectionCzml
             {
                 ElectionResultSet results = new ElectionResultSet();
 
-                var resultFiles = new[]
+                var resultFiles = new InputFile[]
                 {
                     //2004 Federal Election (9 October 2004)
-                    new
+                    new InputFile
                     {
                         Date = new DateTime(2004, 10, 9),
                         Source = File.OpenText("2004-HouseMembersElectedDownload-12246.csv"),
+                        TPPSource = File.OpenText("2004-HouseTppByDivisionDownload-12246.csv"),
                         General = true
                     },
                     //2007 Federal Election (24 November 2007)
-                    new
+                    new InputFile
                     {
                         Date = new DateTime(2007, 11, 24),
                         Source = File.OpenText("2007-HouseMembersElectedDownload-13745.csv"),
+                        TPPSource = File.OpenText("2007-HouseTppByDivisionDownload-13745.csv"),
                         General = true
                     },
                     //2008 Gippsland By-Election (28 June 2008)
-                    new
+                    new InputFile
                     {
                         Date = new DateTime(2008, 6, 28),
                         Source = File.OpenText("2008-Gippsland-HouseCandidatesDownload-13813.csv"),
+                        TPPSource = File.OpenText("2008-Gippsland-HouseTppByPollingPlaceDownload-13813.csv"),
                         General = false
                     },
                     //2008 Lyne By-Election (6 September 2008)
-                    new
+                    new InputFile
                     {
                         Date = new DateTime(2008, 9, 6),
                         Source = File.OpenText("2008-Lyne-HouseCandidatesDownload-13827.csv"),
+                        TPPSource = null,
                         General = false
                     },
                     //2008 Mayo By-Election (6 September 2008)
-                    new
+                    new InputFile
                     {
                         Date = new DateTime(2008, 9, 6),
                         Source = File.OpenText("2008-Mayo-HouseCandidatesDownload-13826.csv"),
+                        TPPSource = null,
                         General = false
                     },
                     //2009 Bradfield By-Election (5 December 2009)
-                    new
+                    new InputFile
                     {
                         Date = new DateTime(2009, 12, 5),
                         Source = File.OpenText("2009-Bradfield-HouseCandidatesDownload-14357.csv"),
+                        TPPSource = null,
                         General = false
                     },
                     //2009 Higgins By-Election (5 December 2009)
-                    new
+                    new InputFile
                     {
                         Date = new DateTime(2009, 12, 5),
                         Source = File.OpenText("2009-Higgins-HouseCandidatesDownload-14358.csv"),
+                        TPPSource = null,
                         General = false
                     },
                     //2010 Federal Election (21 August 2010)
-                    new
+                    new InputFile
                     {
                         Date = new DateTime(2010, 8, 21),
                         Source = File.OpenText("2010-HouseMembersElectedDownload-15508.csv"),
+                        TPPSource = File.OpenText("2010-HouseTppByDivisionDownload-15508.csv"),
                         General = true
                     },
                     //2013 Federal Election (7 September 2013)
-                    new
+                    new InputFile
                     {
                         Date = new DateTime(2013, 9, 7),
                         Source = File.OpenText("2013-HouseMembersElectedDownload-17496.csv"),
+                        TPPSource = File.OpenText("2013-HouseTppByDivisionDownload-17496.csv"),
                         General = true
                     },
                     //2014 Griffith By-Election (8 February 2014)
-                    new
+                    new InputFile
                     {
                         Date = new DateTime(2014, 2, 8),
                         Source = File.OpenText("2014-Griffith-HouseCandidatesDownload-17552.csv"),
+                        TPPSource = File.OpenText("2014-Griffith-HouseTppByPollingPlaceDownload-17552.csv"),
                         General = false
                     }
                 };
 
                 foreach (var resFile in resultFiles)
                 {
-                    var csvr = new CsvReader(resFile.Source);
-                    if (resFile.General)
+                    try
                     {
-                        results.LoadElectionResults(resFile.Date, csvr.GetRecords<ElectionResult>());
+                        var csvr = new CsvReader(resFile.Source);
+                        if (resFile.General)
+                        {
+                            results.LoadElectionResults(resFile.Date, csvr.GetRecords<ElectionResult>());
+
+                            if (resFile.TPPSource != null)
+                            {
+                                var tppr = new CsvReader(resFile.TPPSource);
+                                tppr.Configuration.RegisterClassMap<FederalTPPResultClassMap>();
+                                results.LoadTPPResults(resFile.Date, tppr.GetRecords<FederalTPPResult>());
+                            }
+                        }
+                        else
+                        {
+                            results.LoadElectionResults(resFile.Date, csvr.GetRecords<ByElectionResult>().Where(e => e.Elected == "Y"));
+
+                            if (resFile.TPPSource != null)
+                            {
+                                var tppr = new CsvReader(resFile.TPPSource);
+                                tppr.Configuration.RegisterClassMap<ByElectionPollingBoothTPPResultClassMap>();
+                                results.LoadTPPResults(resFile.Date, tppr.GetRecords<ByElectionPollingBoothTPPResult>());
+                            }
+                        }
                     }
-                    else
+                    finally
                     {
-                        results.LoadElectionResults(resFile.Date, csvr.GetRecords<ByElectionResult>().Where(e => e.Elected == "Y"));
+                        resFile.Close();
                     }
                 }
 
