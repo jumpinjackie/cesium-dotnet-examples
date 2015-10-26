@@ -64,13 +64,17 @@ namespace ElectionCzml
             writer.WriteEndObject();
         }
 
+        const int COLOR_ALPHA = 160;
+
+        const double EXTRUSION_MULTIPLIER = 1.0;
+
         //static Dictionary<string, double> _areas = new Dictionary<string, double>();
 
         //This value was determined through a test run with geometric areas collected and sampling the
         //smallest value among the biggest values of each electorate
         const double MIN_AREA = 0.0028;
 
-        static void WriteComponentGeometryFragment(JsonTextWriter writer, Geometry geom, string name, DatedElectionResult[] results, int? no = null)
+        static void WriteComponentGeometryFragment(JsonTextWriter writer, Geometry geom, string name, DatedElectionResult[] results, DatedTPPResult[] tppResults, int? no = null)
         {
             if (results.Length == 0)
                 return;
@@ -179,7 +183,7 @@ namespace ElectionCzml
                                         writer.WriteValue(255);
                                         writer.WriteValue(255);
                                         writer.WriteValue(255);
-                                        writer.WriteValue(255);
+                                        writer.WriteValue(COLOR_ALPHA);
                                     }
                                     else
                                     {
@@ -212,6 +216,57 @@ namespace ElectionCzml
                     }
                     writer.WriteEndObject(); // }
 
+                    // "extrudedHeight": {
+                    /*
+                    writer.WritePropertyName("extrudedHeight");
+                    writer.WriteStartObject();
+                    {
+                        // "epoch": <start>
+                        writer.WritePropertyName("epoch");
+                        writer.WriteValue(_sceneStart);
+
+                        // "number": [
+                        writer.WritePropertyName("number");
+                        writer.WriteStartArray();
+                        {
+                            //HACK: This example doesn't take into account that electorate redistribution occurs
+                            //Meaning that our 2015 snapshot of Australian Federal Electorates may contain electorates
+                            //that either have changed or did not exist in earlier Federal Elections. Since the AEC does
+                            //not publicly provide such data, we'll denote such electorates as unknown (White)
+                            //
+                            //So peek at the first result, if it's dated on our first Federal Election we know the
+                            //electorate existed back then
+                            bool bDidNotExistIn2004 = !(tppResults[0].ElectionDate.Year == _dtStart.Year &&
+                                tppResults[0].ElectionDate.Month == _dtStart.Month &&
+                                tppResults[0].ElectionDate.Day == _dtStart.Day);
+
+                            if (bDidNotExistIn2004)
+                            {
+                                //0 seconds since epoch
+                                writer.WriteValue(0);
+                                //0 height
+                                writer.WriteValue(0);
+                            }
+                            else
+                            {
+                                //0 seconds since epoch
+                                writer.WriteValue(0);
+                                //The winning party's percentage
+                                writer.WriteValue(Math.Max(tppResults[0].LaborPc, tppResults[0].CoalitionPc) * EXTRUSION_MULTIPLIER);
+                            }
+
+                            foreach (var tppResult in tppResults.Skip(1))
+                            {
+                                int dt = (int)tppResult.ElectionDate.Subtract(_dtStart).TotalSeconds;
+                                writer.WriteValue(dt);
+                                //The winning party's percentage
+                                writer.WriteValue(Math.Max(tppResults[0].LaborPc, tppResults[0].CoalitionPc) * EXTRUSION_MULTIPLIER);
+                            }
+                        }
+                        writer.WriteEndArray(); // ]
+                    }
+                    writer.WriteEndObject(); // }
+                    */
                     // "positions": {
                     writer.WritePropertyName("positions");
                     writer.WriteStartObject();
@@ -238,7 +293,7 @@ namespace ElectionCzml
             }
             writer.WriteEndObject(); // }
         }
-
+        
         //static string[] _parties;
 
         private static int[] GetPartyColor(string partyNm)
@@ -247,24 +302,24 @@ namespace ElectionCzml
             {
                 case "Australian Labor Party":
                 case "Australian Labor Party (State of Queensland)":
-                    return new int[] { 255, 0, 0, 255 }; //Red
+                    return new int[] { 255, 0, 0, COLOR_ALPHA }; //Red
                 case "Liberal":
                 case "Liberal National Party of Queensland":
                 case "Liberal National Party":
                 case "Country Liberals (NT)":
                 case "CLP - The Territory Party":
                 case "The Nationals":
-                    return new int[] { 0, 0, 255, 255 }; //Blue
+                    return new int[] { 0, 0, 255, COLOR_ALPHA }; //Blue
                 case "The Greens":
-                    return new int[] { 0, 255, 0, 255 }; //Green
+                    return new int[] { 0, 255, 0, COLOR_ALPHA }; //Green
                 case "Palmer United Party":
-                    return new int[] { 255, 255, 0, 255 }; //Yellow
+                    return new int[] { 255, 255, 0, COLOR_ALPHA }; //Yellow
                 default:
-                    return new int[] { 84, 84, 84, 255 }; //Grey
+                    return new int[] { 84, 84, 84, COLOR_ALPHA }; //Grey
             }
         }
 
-        static void WritePacket(JsonTextWriter writer, Feature feat, string name, DatedElectionResult[] results)
+        static void WritePacket(JsonTextWriter writer, Feature feat, string name, DatedElectionResult[] results, DatedTPPResult[] tppResults)
         {
             Console.WriteLine($"Writing CZML packets for electorate: {name} ");
             
@@ -287,14 +342,14 @@ namespace ElectionCzml
                 foreach (int idx in Enumerable.Range(0, subGeomCount - 1))
                 {
                     var subGeom = geom.GetGeometryRef(idx);
-                    WriteComponentGeometryFragment(writer, subGeom, name, results, idx);
+                    WriteComponentGeometryFragment(writer, subGeom, name, results, tppResults, idx);
                     Console.Write(".");
                 }
                 Console.WriteLine();
             }
             else if (geomName == "POLYGON")
             {
-                WriteComponentGeometryFragment(writer, geom, name, results);
+                WriteComponentGeometryFragment(writer, geom, name, results, tppResults);
             }
         }
 
@@ -463,9 +518,10 @@ namespace ElectionCzml
                         {
                             string electorateName = feat.GetFieldAsString("ELECT_DIV");
                             var elecResults = results.GetResultsForDivison(electorateName);
+                            var tppResults = results.GetTPPForDivison(electorateName);
                             if (elecResults.Length > 0)
                             {
-                                WritePacket(writer, feat, electorateName, elecResults);
+                                WritePacket(writer, feat, electorateName, elecResults, tppResults);
                             }
                             feat = layer.GetNextFeature();
                         }
