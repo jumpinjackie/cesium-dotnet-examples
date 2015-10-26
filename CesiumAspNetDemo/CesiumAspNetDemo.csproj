@@ -806,7 +806,7 @@
     <Content Include="Views\Demo\KML.cshtml" />
     <Content Include="Views\Demo\CZML.cshtml" />
     <Content Include="Views\Demo\SignalR.cshtml" />
-    <Content Include="Views\Demo\CZML4D.cshtml" />
+    <Content Include="Views\Demo\CZMLTimeDynamic.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
