@@ -1,0 +1,67 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>glTF Example</title>
+    <style type="text/css">
+        #viewer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
+    <link rel="stylesheet" href="~/Scripts/Cesium/Widgets/widgets.css" />
+    <script type="text/javascript" src="~/Scripts/Cesium/Cesium.js"></script>
+    <script type="text/javascript">
+
+        function getPosition(callback, errCallback) {
+            //navigator.geolocation.getCurrentPosition(callback, errCallback);
+            callback({
+                coords: {
+                    longitude: 144.30,
+                    latitude: -33.4
+                }
+            });
+        }
+
+        window.onload = function () {
+            var viewer = new Cesium.Viewer("viewer");
+            var scene = viewer.scene;
+
+            getPosition(function (res) {
+                var modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
+                    Cesium.Cartesian3.fromDegrees(res.coords.longitude, res.coords.latitude, 0.0));
+
+                scene.camera.flyTo({
+                    destination: Cesium.Cartesian3.fromDegrees(res.coords.longitude, res.coords.latitude, 1000.0)
+                });
+
+                var model = scene.primitives.add(Cesium.Model.fromGltf({
+                    url: "@Url.Content("~/Content/models/CesiumMan/Cesium_Man.gltf")",
+                    modelMatrix: modelMatrix,
+                    scale: 100.0
+                }))
+
+                Cesium.when(model.readyPromise).then(function (m) {
+                    m.activeAnimations.addAll({
+                        loop: Cesium.ModelAnimationLoop.REPEAT
+                    });
+                });
+            }, function (err) {
+                alert("Failed to get your current position")
+            });
+            
+        };
+
+    </script>
+</head>
+<body>
+    <div id="viewer"> 
+    </div>
+</body>
+</html>

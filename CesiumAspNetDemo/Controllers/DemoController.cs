@@ -22,5 +22,7 @@ namespace CesiumAspNetDemo.Controllers
         public ActionResult SignalR() => View();
 
         public ActionResult CZMLTimeDynamic() => View();
+
+        public ActionResult GLTF() => View();
     }
 }
