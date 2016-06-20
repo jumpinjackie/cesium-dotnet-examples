@@ -17,6 +17,7 @@
     </style>
     <link rel="stylesheet" href="~/Scripts/Cesium/Widgets/widgets.css" />
     <script type="text/javascript" src="~/Scripts/Cesium/Cesium.js"></script>
+    <script type="text/javascript" src="~/Scripts/czinit.js"></script>
     <script type="text/javascript">
 
         function getPosition(callback, errCallback) {
@@ -30,7 +31,7 @@
         }
 
         window.onload = function () {
-            var viewer = new Cesium.Viewer("viewer");
+            var viewer = createViewer("viewer", "@Url.Content("~/Scripts")");
             var scene = viewer.scene;
 
             getPosition(function (res) {
@@ -55,7 +56,7 @@
             }, function (err) {
                 alert("Failed to get your current position")
             });
-            
+
         };
 
     </script>

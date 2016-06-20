@@ -37,12 +37,13 @@
     <script type="text/javascript" src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
     <script type="text/javascript" src="~/signalr/hubs"></script>
     <script type="text/javascript" src="~/Scripts/Cesium/Cesium.js"></script>
+    <script type="text/javascript" src="~/Scripts/czinit.js"></script>
     <script type="text/javascript">
 
         var czmlDS = null;
         var ko = Cesium.knockout;
         var conn = $.connection.DemoHub;
-        
+
         function FormatDescription(data) {
             var html = "";
             html += "<p>Browser: " + data.Browser + " v" + data.BrowserVersion + "</p>";
@@ -175,7 +176,7 @@
         var viewModel = null;
 
         window.onload = function () {
-            var viewer = new Cesium.Viewer("viewer");
+            var viewer = createViewer("viewer", "@Url.Content("~/Scripts")");
             Cesium.CzmlDataSource.load({ id: "document", version: "1.0" }).then(function (ds) {
                 czmlDS = ds;
                 viewer.dataSources.add(czmlDS);

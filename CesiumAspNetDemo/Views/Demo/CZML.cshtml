@@ -17,10 +17,11 @@
     </style>
     <link rel="stylesheet" href="~/Scripts/Cesium/Widgets/widgets.css" />
     <script type="text/javascript" src="~/Scripts/Cesium/Cesium.js"></script>
+    <script type="text/javascript" src="~/Scripts/czinit.js"></script>
     <script type="text/javascript">
 
         window.onload = function () {
-            var viewer = new Cesium.Viewer("viewer");
+            var viewer = createViewer("viewer", "@Url.Content("~/Scripts")");
             viewer.dataSources.add(Cesium.CzmlDataSource.load("@Url.Content("~/Content/simple.czml")"));
         };
 

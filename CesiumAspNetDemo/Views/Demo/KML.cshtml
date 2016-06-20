@@ -29,6 +29,7 @@
         }
     </style>
     <script type="text/javascript" src="~/Scripts/Cesium/Cesium.js"></script>
+    <script type="text/javascript" src="~/Scripts/czinit.js"></script>
     <script type="text/javascript">
 
         var ko = Cesium.knockout;
@@ -77,7 +78,7 @@
         }
 
         window.onload = function () {
-            var viewer = new Cesium.Viewer("viewer");
+            var viewer = createViewer("viewer", "@Url.Content("~/Scripts")");
             var viewModel = new LayersViewModel(viewer);
             viewModel.loadLayers().then(function () {
                 ko.applyBindings(viewModel, document.getElementById("layers"));

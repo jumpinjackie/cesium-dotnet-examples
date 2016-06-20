@@ -29,6 +29,7 @@
         }
     </style>
     <script type="text/javascript" src="~/Scripts/Cesium/Cesium.js"></script>
+    <script type="text/javascript" src="~/Scripts/czinit.js"></script>
     <script type="text/javascript">
 
         var ko = Cesium.knockout;
@@ -47,7 +48,7 @@
             this.loadLayers = function () {
                 var data_playgrounds = null;
                 var p_playgrounds = Cesium.GeoJsonDataSource.load("@Url.Content("~/Content/RECREATION_Playgrounds.geojson")");
-            
+
                 var data_rail = null;
                 var p_rail = Cesium.GeoJsonDataSource.load("@Url.Content("~/Content/TRANS_Rail.geojson")", {
                     stroke: Cesium.Color.RED,
@@ -88,7 +89,7 @@
         }
 
         window.onload = function () {
-            var viewer = new Cesium.Viewer("viewer");
+            var viewer = createViewer("viewer", "@Url.Content("~/Scripts")");
             viewer.scene.camera.flyTo({
                 //Fly to Cambridge, MA, USA
                 destination: Cesium.Cartesian3.fromDegrees(-71.10973349999999, 42.3736158, 15000.0)
